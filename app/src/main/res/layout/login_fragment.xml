@@ -1,44 +1,64 @@
-<RelativeLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
     android:paddingEnd="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingStart="@dimen/activity_vertical_margin">
 
-    <ImageView
-        android:id="@+id/logo_head"
-        android:layout_width="250sp"
-        android:layout_height="250sp"
-        android:layout_centerHorizontal="true"
-        android:scaleType="fitXY"
-        android:src="@mipmap/ic_launcher"/>
-
-    <EditText
-        android:id="@+id/user_et"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/logo_head"
-        android:hint="Email"
-        />
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/pass_et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/user_et"
-        android:hint="Password"
-        android:inputType="textPassword"
-        />
+        <ImageView
+            android:id="@+id/logo_head"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="48sp"
+            android:scaleType="center"
+            android:src="@mipmap/ic_launcher"/>
 
-    <Button
-        android:id="@+id/sign_up"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/pass_et"
-        android:background="@color/colorAccent"
-        android:text="Sign Up"
-        android:textColor="@color/colorTextIcons"/>
-</RelativeLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/user"
+            style="@style/TextInputLayerTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/logo_head">
+
+            <EditText
+                android:id="@+id/user_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/pass"
+            style="@style/TextInputLayerTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/user">
+
+            <EditText
+                android:id="@+id/pass_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:inputType="textPassword"
+                />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/sign_up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pass"
+            android:background="@color/colorAccent"
+            android:text="Sign Up"
+            android:textColor="@color/colorTextIcons"/>
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

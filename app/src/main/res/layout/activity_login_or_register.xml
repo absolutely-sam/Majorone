@@ -30,6 +30,7 @@
         android:layout_alignParentBottom="true"
         android:gravity="center"
         android:paddingBottom="32sp"
-        android:text="New User?"
+        android:text="Not A Member? Sign Up"
+        android:textColor="@color/colorAccent"
         />
 </RelativeLayout>
