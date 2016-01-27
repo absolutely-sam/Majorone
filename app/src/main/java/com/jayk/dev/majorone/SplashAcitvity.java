@@ -39,7 +39,7 @@ public class SplashAcitvity extends Activity {
             } else {
                startActivity(new Intent(SplashAcitvity.this, Connect.class));
             }
-
+            finish();
          }
       }, 2000l);
    }
