@@ -1,36 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.v4.view.ViewPager
+    android:id="@+id/slide_view"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jayk.dev.majorone.LoginOrRegister">
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:background="@color/colorPrimary">
-    </android.support.v7.widget.Toolbar>
-
-    <FrameLayout
-        android:id="@+id/holder_frame"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/register"
-        android:layout_below="@+id/toolbar">
-
-    </FrameLayout>
-
-    <TextView
-        android:id="@+id/register"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:gravity="center"
-        android:paddingBottom="32sp"
-        android:text="Not A Member? Sign Up"
-        android:textColor="@color/colorAccent"
-        />
-</RelativeLayout>
+    android:background="@drawable/sunset">
+</android.support.v4.view.ViewPager>

@@ -11,76 +11,73 @@ package com.jayk.dev.majorone;
 
 //Note:Don't include the code in repository without testing
 
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.text.Html;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.TextView;
+import android.view.WindowManager;
 
-public class LoginOrRegister extends AppCompatActivity {
+public class LoginOrRegister extends FragmentActivity {
 
 
-   private static boolean isReg = false;
-   ActionBar actionBar;
-   TextView textView;
+   public static final int NUM_PAGES = 2;
+   static ViewPager slideView;
+   PagerAdapter slideViewPagerAdapter;
+
+   public static void goToRegister() {
+      slideView.setCurrentItem(1, true);
+   }
+
+   public static void goToLogin() {
+      slideView.setCurrentItem(0, true);
+   }
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
-      setContentView(R.layout.activity_login_or_register);
-      Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-      setSupportActionBar(toolbar);
-      actionBar = getSupportActionBar();
-      setActionBarText("Login Page");
-
-      textView = (TextView) findViewById(R.id.register);
-
-
-      new Handler().postDelayed(new Runnable() {
-         @Override
-         public void run() {
-            ToggleFragment();
-         }
-      }, 500l);
-
-      textView.setOnClickListener(new View.OnClickListener() {
-         @Override
-         public void onClick(View v) {
-            ToggleFragment();
-         }
-      });
-
-   }
-
-   public void ToggleFragment() {
-      if (!isReg) {
-         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-         ft.setCustomAnimations(R.anim.fragmentin, R.anim.fragmentout);
-         ft.replace(R.id.holder_frame, new LoginFragment());
-         ft.commit();
-         setActionBarText("Login Page");
-         textView.setText("Not A Member? Sign Up");
-         isReg = true;
-      } else {
-         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-         ft.setCustomAnimations(R.anim.fragmentin, R.anim.fragmentout);
-         ft.replace(R.id.holder_frame, new RegFragment());
-         ft.commit();
-         setActionBarText("Register Here");
-         textView.setText("Registered? Sign In");
-         isReg = false;
+      if (Build.VERSION.SDK_INT < 16) {
+         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
       }
+      if (Build.VERSION.SDK_INT > 15 && Build.VERSION.SDK_INT < 19) {
+         View decorView = getWindow().getDecorView();
+         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+         decorView.setSystemUiVisibility(uiOptions);
+      }
+
+      setContentView(R.layout.activity_login_or_register);
+      slideView = (ViewPager) findViewById(R.id.slide_view);
+      slideViewPagerAdapter = new MySlideAdapter(getSupportFragmentManager());
+      slideView.setAdapter(slideViewPagerAdapter);
    }
 
-   private void setActionBarText(String text) {
+   class MySlideAdapter extends FragmentStatePagerAdapter {
 
-      if (actionBar != null)
-         actionBar.setTitle(Html.fromHtml("<font color=\"#ffffff\">" + text + "</font>"));
 
+      public MySlideAdapter(FragmentManager fm) {
+         super(fm);
+      }
+
+      @Override
+      public Fragment getItem(int position) {
+         switch (position) {
+            case 0:
+               return new LoginFragment();
+            case 1:
+               return new RegFragment();
+         }
+         return null;
+      }
+
+      @Override
+      public int getCount() {
+         return NUM_PAGES;
+      }
    }
 
 }
